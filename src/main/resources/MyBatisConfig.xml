@@ -19,5 +19,9 @@
         </environment>
     </environments>
     <mappers>
+        <mapper resource="mybatis/xml/CarMapper.xml"/>
+        <mapper resource="mybatis/xml/InsuranceMapper.xml"/>
+        <mapper resource="mybatis/xml/OwnerMapper.xml"/>
+        <mapper resource="mybatis/xml/InsuranceCarMapper.xml"/>
     </mappers>
 </configuration>

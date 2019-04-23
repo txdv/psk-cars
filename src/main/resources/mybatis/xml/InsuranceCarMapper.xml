@@ -2,25 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="lt.vu.usecases.mybatis.dao.StudentCourseMapper">
     <resultMap id="BaseResultMap" type="lt.vu.usecases.mybatis.model.StudentCourse">
-        <id column="student_id" jdbcType="INTEGER" property="studentId"/>
-        <id column="course_id" jdbcType="INTEGER" property="courseId"/>
+        <id column="insurance_id" jdbcType="INTEGER" property="studentId"/>
+        <id column="car_id" jdbcType="INTEGER" property="courseId"/>
     </resultMap>
     
     <delete id="deleteByPrimaryKey" parameterType="map">
-        DELETE FROM public.student_course
-        WHERE student_id = #{studentId,jdbcType=INTEGER}
-              AND course_id = #{courseId,jdbcType=INTEGER}
+        DELETE FROM public.insurance_car
+        WHERE insurance_id = #{insuranceId, jdbcType=INTEGER}
+          AND car_id       = #{carId,       jdbcType=INTEGER}
     </delete>
     
     <insert id="insert" parameterType="lt.vu.usecases.mybatis.model.StudentCourse">
-        INSERT INTO public.student_course (student_id, course_id)
-        VALUES (#{studentId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER})
+        INSERT INTO public.insurance_car (insurance_id, car_id)
+        VALUES (#{insurance_car,jdbcType=INTEGER}, #{car_id,jdbcType=INTEGER})
     </insert>
     
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT
-            student_id,
-            course_id
-        FROM public.student_course
+            insurance_id,
+            car_id
+        FROM public.insurance_car
     </select>
 </mapper>
