@@ -36,12 +36,20 @@ public class RequestUseCaseControllerMyBatis {
     private CarMapper carMapper;
     @Inject
     private InsuranceMapper insuranceMapper;
+    @Inject
+    private InsuranceCarMapper insuranceCarMapper;
 
     @Transactional
     public void createCourseStudent() {
         ownerMapper.insert(owner);
         car.setOwnerId(owner.getId());
         carMapper.insert(car);
+
+        InsuranceCar insuranceCar = new InsuranceCar();
+        insuranceCar.setInsuranceId(insurance.getId());
+        insuranceCar.setCarId(car.getId());
+
+        insuranceCarMapper.insert(insuranceCar);
 
         log.info("Maybe OK...");
     }

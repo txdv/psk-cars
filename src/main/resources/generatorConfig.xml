@@ -35,7 +35,7 @@
         <table schema="public" tableName="owner">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
         </table>
-        <table schema="public" tableName="car_insurance">
+        <table schema="public" tableName="insurance_car">
         </table>
     </context>
 </generatorConfiguration>
