@@ -1,6 +1,6 @@
 package lt.vu.usecases.ejb;
 
-import lt.vu.entities.Student;
+import lt.vu.entities.Car;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -9,15 +9,15 @@ import javax.persistence.SynchronizationType;
 import java.util.List;
 
 @Stateless
-public class StudentEjbDAO {
+public class CarEjbDAO {
     @PersistenceContext(synchronization = SynchronizationType.UNSYNCHRONIZED)
     private EntityManager em;
 
-    public void create(Student student) {
-        em.persist(student);
+    public void create(Car car) {
+        em.persist(car);
     }
 
-    public List<Student> getAllStudents() {
-        return em.createNamedQuery("Student.findAll", Student.class).getResultList();
+    public List<Car> getAllCars() {
+        return em.createNamedQuery("Car.findAll", Car.class).getResultList();
     }
 }

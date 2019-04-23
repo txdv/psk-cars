@@ -2,10 +2,11 @@ package lt.vu.usecases.cdi.conversation;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import lt.vu.entities.Course;
-import lt.vu.entities.Student;
-import lt.vu.usecases.cdi.dao.CourseDAO;
-import lt.vu.usecases.cdi.dao.StudentDAO;
+import lt.vu.entities.Car;
+import lt.vu.entities.Insurance;
+import lt.vu.entities.Owner;
+import lt.vu.usecases.cdi.dao.InsuranceDAO;
+import lt.vu.usecases.cdi.dao.CarDAO;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
@@ -40,16 +41,18 @@ public class ConversationUseCaseControllerCdi implements Serializable {
     private Conversation conversation;
 
     @Inject
-    private CourseDAO courseDAO;
+    private InsuranceDAO insuranceDAO;
     @Inject
-    private StudentDAO studentDAO;
+    private CarDAO carDAO;
 
     @Getter
-    private Course course = new Course();
+    private Insurance insurance = new Insurance();
     @Getter
-    private Student student = new Student();
+    private Car car = new Car();
     @Getter
-    private List<Student> allStudents;
+    private Owner owner = new Owner();
+    @Getter
+    private List<Car> allCars;
 
     private CURRENT_FORM currentForm = CURRENT_FORM.CREATE_COURSE;
     public boolean isCurrentForm(CURRENT_FORM form) {
@@ -73,8 +76,8 @@ public class ConversationUseCaseControllerCdi implements Serializable {
      * The second conversation step.
      */
     public void createStudent() {
-        student.getCourseList().add(course);
-        course.getStudentList().add(student);
+        insurance.getCarList().add(car);
+        car.getInsuranceList().add(insurance);
         currentForm = CURRENT_FORM.CONFIRMATION;
     }
 
@@ -84,8 +87,8 @@ public class ConversationUseCaseControllerCdi implements Serializable {
     @Transactional(Transactional.TxType.REQUIRED)
     public String ok() {
         try {
-            courseDAO.create(course);
-            studentDAO.create(student);
+            insuranceDAO.create(insurance);
+            carDAO.create(car);
             em.flush();
             Messages.addGlobalInfo("Success!");
         } catch (OptimisticLockException ole) {
@@ -111,6 +114,6 @@ public class ConversationUseCaseControllerCdi implements Serializable {
     }
 
     private void loadAllStudents() {
-        allStudents = studentDAO.getAllStudents();
+        allCars = carDAO.getAllCars();
     }
 }

@@ -13,21 +13,21 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "UNIVERSITY")
 @NamedQueries({
-    @NamedQuery(name = "University.findAll", query = "SELECT u FROM University u"),
-    @NamedQuery(name = "University.findById", query = "SELECT u FROM University u WHERE u.id = :id"),
-    @NamedQuery(name = "University.findByTitle", query = "SELECT u FROM University u WHERE u.title = :title"),
-    @NamedQuery(name = "University.findByOptLockVersion", query = "SELECT u FROM University u WHERE u.optLockVersion = :optLockVersion")})
+        @NamedQuery(name = "Car.findAll", query = "SELECT c FROM Car c"),
+        @NamedQuery(name = "Car.findById", query = "SELECT c FROM Car c WHERE c.id = :id")
+})
 @Getter
 @Setter
 @EqualsAndHashCode(of = "title")
 @ToString(of = {"id", "title"})
-public class University implements Serializable {
+public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,13 +36,21 @@ public class University implements Serializable {
     private Integer id;
 
     @Size(max = 50)
-    @Column(name = "TITLE")
-    private String title;
+    @Column(name = "VIN")
+    private String vin;
 
-    @Version
-    @Column(name = "OPT_LOCK_VERSION")
-    private Integer optLockVersion;
+    @Column(name = "BUILT")
+    Instant built;
 
+    @Size(max = 50)
+    @Column(name = "COLOR")
+    private String color;
+
+    @ManyToMany(mappedBy = "carList")
+    private List<Insurance> insuranceList = new ArrayList<>();
+
+    /*
     @OneToMany(mappedBy = "university")
     private List<Student> studentList = new ArrayList<>();
+    */
 }

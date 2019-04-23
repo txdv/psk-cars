@@ -1,6 +1,6 @@
 package lt.vu.rest;
 
-import lt.vu.entities.Student;
+import lt.vu.entities.Car;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -12,15 +12,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 @ApplicationScoped
-@Path("/student")
+@Path("/car")
 @Produces(MediaType.APPLICATION_JSON)
-public class StudentRestService {
+public class CarRestService {
 
     @Inject private EntityManager em;
 
     @GET
     @Path("/{studentId}")
-    public Student find(@PathParam("studentId") Integer studentId) {
-        return em.find(Student.class, studentId);
+    public Car find(@PathParam("studentId") Integer studentId) {
+        return em.find(Car.class, studentId);
     }
 }

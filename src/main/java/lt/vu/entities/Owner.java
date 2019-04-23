@@ -13,19 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "STUDENT")
+@Table(name = "OWNER")
 @NamedQueries({
-    @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s"),
-    @NamedQuery(name = "Student.findById", query = "SELECT s FROM Student s WHERE s.id = :id"),
-    @NamedQuery(name = "Student.findByFirstName", query = "SELECT s FROM Student s WHERE s.firstName LIKE :firstName"),
-    @NamedQuery(name = "Student.findByLastName", query = "SELECT s FROM Student s WHERE s.lastName LIKE :lastName"),
-    @NamedQuery(name = "Student.findByRegistrationNo", query = "SELECT s FROM Student s WHERE s.registrationNo = :registrationNo")
+    @NamedQuery(name = "Owner.findAll", query = "SELECT o FROM Owner o"),
+    @NamedQuery(name = "Owner.findById", query = "SELECT o FROM Owner o WHERE o.id = :id"),
+    @NamedQuery(name = "Owner.findByFirstName", query = "SELECT o FROM Owner o WHERE o.firstName LIKE :firstName"),
+    @NamedQuery(name = "Owner.findByLastName", query = "SELECT o FROM Owner o WHERE o   .lastName LIKE :lastName"),
 })
 @Getter
 @Setter
 @EqualsAndHashCode(of = "registrationNo")
 @ToString(of = {"id", "firstName", "lastName", "registrationNo"})
-public class Student implements Serializable {
+public class Owner implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,6 +48,7 @@ public class Student implements Serializable {
     @Column(name = "OPT_LOCK_VERSION")
     private Integer optLockVersion;
 
+    /*
     @JoinTable(name = "STUDENT_COURSE", joinColumns = {
         @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID")})
@@ -60,5 +60,5 @@ public class Student implements Serializable {
     @ManyToOne
     @JohnzonIgnore
     private University university;
-
+*/
 }

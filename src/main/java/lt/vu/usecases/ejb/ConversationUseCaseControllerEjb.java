@@ -1,8 +1,8 @@
 package lt.vu.usecases.ejb;
 
 import lombok.Getter;
-import lt.vu.entities.Course;
-import lt.vu.entities.Student;
+import lt.vu.entities.Car;
+import lt.vu.entities.Insurance;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
@@ -34,14 +34,14 @@ public class ConversationUseCaseControllerEjb implements Serializable {
     private Conversation conversation;
 
     @Inject
-    private CourseEjbDAO courseEjbDAO;
+    private CarEjbDAO carEjbDAO;
     @Inject
-    private StudentEjbDAO studentEjbDAO;
+    private InsuranceEjbDAO insuranceEjbDAO;
 
     @Getter
-    private Course course = new Course();
+    private Car car = new Car();
     @Getter
-    private Student student = new Student();
+    private Insurance insurance = new Insurance();
 
     private CURRENT_FORM currentForm = CURRENT_FORM.CREATE_COURSE;
     public boolean isCurrentForm(CURRENT_FORM form) {
@@ -60,8 +60,8 @@ public class ConversationUseCaseControllerEjb implements Serializable {
      * The second conversation step.
      */
     public void createStudent() {
-        student.getCourseList().add(course);
-        course.getStudentList().add(student);
+        insurance.getCarList().add(car);
+        car.getInsuranceList().add(insurance);
         currentForm = CURRENT_FORM.CONFIRMATION;
     }
 
@@ -70,8 +70,8 @@ public class ConversationUseCaseControllerEjb implements Serializable {
      */
     public String ok() {
         try {
-            courseEjbDAO.create(course);
-            studentEjbDAO.create(student);
+            carEjbDAO.create(car);
+            insuranceEjbDAO.create(insurance);
             em.joinTransaction();
             em.flush();
             Messages.addGlobalInfo("Success!");
@@ -95,7 +95,7 @@ public class ConversationUseCaseControllerEjb implements Serializable {
         return PAGE_INDEX_REDIRECT;
     }
 
-    public List<Student> getAllStudents() {
-        return studentEjbDAO.getAllStudents();
+    public List<Car> getAllStudents() {
+        return carEjbDAO.getAllCars();
     }
 }

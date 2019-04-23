@@ -2,10 +2,12 @@ package lt.vu.usecases.cdi.simple;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import lt.vu.entities.Course;
-import lt.vu.entities.Student;
-import lt.vu.usecases.cdi.dao.CourseDAO;
-import lt.vu.usecases.cdi.dao.StudentDAO;
+import lt.vu.entities.Car;
+import lt.vu.entities.Insurance;
+import lt.vu.entities.Owner;
+import lt.vu.usecases.cdi.dao.InsuranceDAO;
+import lt.vu.usecases.cdi.dao.CarDAO;
+import lt.vu.usecases.cdi.dao.OwnerDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -18,11 +20,14 @@ import java.util.List;
 public class RequestUseCaseControllerJPA {
 
     @Getter
-    private Course course = new Course();
+    private Owner owner = new Owner();
     @Getter
-    private Student student = new Student();
+    private Car car = new Car();
     @Getter
-    private List<Student> allStudents;
+    private Insurance insurance = new Insurance();
+
+    @Getter
+    private List<Car> allCars;
 
     @PostConstruct
     public void init() {
@@ -30,20 +35,22 @@ public class RequestUseCaseControllerJPA {
     }
 
     @Inject
-    private CourseDAO courseDAO;
+    private OwnerDAO ownerDAO;
     @Inject
-    private StudentDAO studentDAO;
+    private InsuranceDAO insuranceDAO;
+    @Inject
+    private CarDAO carDAO;
 
     @Transactional
     public void createCourseStudent() {
-        student.getCourseList().add(course);
-        course.getStudentList().add(student);
-        courseDAO.create(course);
-        studentDAO.create(student);
+        // getCourseList()
+        ownerDAO.create(owner);
+        insuranceDAO.create(insurance);
+        carDAO.create(car);
         log.info("Maybe OK...");
     }
 
     private void loadAllStudents() {
-        allStudents = studentDAO.getAllStudents();
+        allCars = carDAO.getAllCars();
     }
 }

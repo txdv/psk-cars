@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.johnzon.mapper.JohnzonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -17,17 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "COURSE")
+@Table(name = "INSURANCE")
 @NamedQueries({
-    @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c"),
-    @NamedQuery(name = "Course.findById", query = "SELECT c FROM Course c WHERE c.id = :id"),
-    @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name"),
-    @NamedQuery(name = "Course.findByOptLockVersion", query = "SELECT c FROM Course c WHERE c.optLockVersion = :optLockVersion")})
+        @NamedQuery(name = "Insurance.findAll", query = "SELECT i FROM Insurance i"),
+        @NamedQuery(name = "Insurance.findById", query = "SELECT i FROM Insurance i WHERE i.id = :id")
+})
 @Getter
 @Setter
 @EqualsAndHashCode(of = "name")
 @ToString(of = {"id", "name"})
-public class Course implements Serializable {
+public class Insurance implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,10 +39,7 @@ public class Course implements Serializable {
     @Column(name = "NAME")
     private String name;
 
-    @Version
-    @Column(name = "OPT_LOCK_VERSION")
-    private Integer optLockVersion;
-
-    @ManyToMany(mappedBy = "courseList")
-    private List<Student> studentList = new ArrayList<>();
+    @ManyToMany
+    @JohnzonIgnore
+    private List<Car> carList = new ArrayList<>();
 }

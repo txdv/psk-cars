@@ -1,6 +1,6 @@
 package lt.vu.usecases.cdi.dao;
 
-import lt.vu.entities.Course;
+import lt.vu.entities.Owner;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -8,15 +8,15 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @ApplicationScoped
-public class CourseDAO {
+public class OwnerDAO {
     @Inject
     private EntityManager em;
 
-    public void create(Course course) {
-        em.persist(course);
+    public void create(Owner owner) {
+        em.persist(owner);
     }
 
-    public List<Course> getAllCourses() {
-        return em.createNamedQuery("Course.findAll", Course.class).getResultList();
+    public List<Owner> getAllUniversities() {
+        return em.createNamedQuery("Owner.findAll", Owner.class).getResultList();
     }
 }
