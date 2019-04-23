@@ -9,24 +9,25 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.apache.johnzon.mapper.JohnzonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "UNIVERSITY")
+@Table(name = "CAR")
 @NamedQueries({
         @NamedQuery(name = "Car.findAll", query = "SELECT c FROM Car c"),
         @NamedQuery(name = "Car.findById", query = "SELECT c FROM Car c WHERE c.id = :id")
 })
 @Getter
 @Setter
-@EqualsAndHashCode(of = "title")
-@ToString(of = {"id", "title"})
+@EqualsAndHashCode(of = "vin")
+@ToString(of = {"id", "vin"})
 public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,7 +41,7 @@ public class Car implements Serializable {
     private String vin;
 
     @Column(name = "BUILT")
-    Instant built;
+    Date built;
 
     @Size(max = 50)
     @Column(name = "COLOR")
@@ -49,8 +50,11 @@ public class Car implements Serializable {
     @ManyToMany(mappedBy = "carList")
     private List<Insurance> insuranceList = new ArrayList<>();
 
-    /*
-    @OneToMany(mappedBy = "university")
-    private List<Student> studentList = new ArrayList<>();
-    */
+    @ManyToMany(mappedBy = "carList")
+    private List<Owner> ownerList = new ArrayList<>();
+
+    @JoinColumn(name = "OWNER_ID", referencedColumnName = "ID")
+    @ManyToOne
+    @JohnzonIgnore
+    private Owner owner;
 }

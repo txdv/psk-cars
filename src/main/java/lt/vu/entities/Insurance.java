@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lt.vu.entities;
 
 import lombok.EqualsAndHashCode;
@@ -12,9 +7,9 @@ import lombok.ToString;
 import org.apache.johnzon.mapper.JohnzonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,8 +20,7 @@ import java.util.List;
 })
 @Getter
 @Setter
-@EqualsAndHashCode(of = "name")
-@ToString(of = {"id", "name"})
+@ToString(of = {"id"})
 public class Insurance implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,10 +29,15 @@ public class Insurance implements Serializable {
     @Column(name = "ID")
     private Integer id;
 
-    @Size(min = 4, max = 50)
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "DATE_START")
+    private Date dateStart;
 
+    @Column(name = "DATE_END")
+    private Date dateEnd;
+
+    @JoinTable(name = "INSURANCE_CAR", joinColumns = {
+            @JoinColumn(name = "INSURANCE_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+            @JoinColumn(name = "CAR_ID", referencedColumnName = "ID")})
     @ManyToMany
     @JohnzonIgnore
     private List<Car> carList = new ArrayList<>();

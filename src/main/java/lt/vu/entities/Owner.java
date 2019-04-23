@@ -22,8 +22,8 @@ import java.util.List;
 })
 @Getter
 @Setter
-@EqualsAndHashCode(of = "registrationNo")
-@ToString(of = {"id", "firstName", "lastName", "registrationNo"})
+@EqualsAndHashCode(of = {"firstName", "lastName"})
+@ToString(of = {"id", "firstName", "lastName"})
 public class Owner implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,25 +40,7 @@ public class Owner implements Serializable {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Size(min = 3, max = 20)
-    @Column(name = "REGISTRATION_NO")
-    private String registrationNo;
+    @OneToMany
+    private List<Car> carList = new ArrayList<>();
 
-    @Version
-    @Column(name = "OPT_LOCK_VERSION")
-    private Integer optLockVersion;
-
-    /*
-    @JoinTable(name = "STUDENT_COURSE", joinColumns = {
-        @JoinColumn(name = "STUDENT_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "COURSE_ID", referencedColumnName = "ID")})
-    @ManyToMany
-    @JohnzonIgnore
-    private List<Course> courseList = new ArrayList<>();
-
-    @JoinColumn(name = "UNIVERSITY_ID", referencedColumnName = "ID")
-    @ManyToOne
-    @JohnzonIgnore
-    private University university;
-*/
 }

@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
     <h:head>
         <h:outputStylesheet name="css/styles.css" />
@@ -13,51 +14,73 @@
     <h:body>
         <h1>Request type usecase example (DAO with JPA)</h1>
         <h:form>
-            <p:fieldset legend="All students" toggleable="true" style="width: 50%">
-                <p:dataTable value="#{requestUseCaseControllerJPA.allStudents}" var="student">
-                    <p:column headerText="Student">
-                        <h:outputText value="#{student.firstName} #{student.lastName} #{student.registrationNo}" />
+            <p:fieldset legend="All insurances" toggleable="true" style="width: 50%">
+                <p:dataTable value="#{requestUseCaseControllerJPA.allInsurances}" var="insurance">
+                    <p:column headerText="Insurance">
+                        <h:outputText value="#{insurance.dateStart} #{insurance.dateEnd}" />
                     </p:column>
-                    <p:column headerText="Courses">
-                        <ui:repeat var="course" value="#{student.courseList}">
-                            <h:outputText value="#{course.name} " />
+                    <p:column headerText="Car">
+                        <ui:repeat var="car" value="#{insurance.carList}">
+                            <h:outputText value="#{car.vin} #{car.built} #{car.color}" />
+                            <p:column headerText="Owner">
+                                <h:outputText value="owned by #{car.owner.firstName} #{car.owner.lastName}" />
+                            </p:column>
                         </ui:repeat>
-                    </p:column>
-                    <p:column headerText="University">
-                        <h:outputText value="#{student.university.title} " />
                     </p:column>
                 </p:dataTable>
             </p:fieldset>
 
-            <h2>Create new course and student</h2>
+            <h2>Create new insurance with car and owner</h2>
             <table>
                 <tr>
                     <td>
                         <h:panelGrid columns="3">
-                            <p:outputLabel for="firstName" value="First name"/>
-                            <p:inputText id="firstName" value="#{requestUseCaseControllerJPA.student.firstName}"/>
-                            <p:message for="firstName"/>
+                            <p:outputLabel for="dateStart" value="date start"/>
+                            <p:inputText id="dateStart" value="#{requestUseCaseControllerJPA.insurance.dateStart}">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </p:inputText>
+                            <p:message for="dateStart"/>
 
-                            <p:outputLabel for="lastName" value="Last name"/>
-                            <p:inputText id="lastName" value="#{requestUseCaseControllerJPA.student.lastName}"/>
-                            <p:message for="lastName"/>
-
-                            <p:outputLabel for="regnr" value="Registration No."/>
-                            <p:inputText id="regnr" value="#{requestUseCaseControllerJPA.student.registrationNo}"/>
-                            <p:message for="regnr"/>
+                            <p:outputLabel for="dateEnd" value="date end"/>
+                            <p:inputText id="dateEnd" value="#{requestUseCaseControllerJPA.insurance.dateEnd}">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </p:inputText>
+                            <p:message for="dateEnd"/>
                         </h:panelGrid>
                     </td>
                     <td>
                         <h:panelGrid columns="3">
-                            <p:outputLabel for="courseName" value="Course name"/>
-                            <p:inputText id="courseName" value="#{requestUseCaseControllerJPA.course.name}"/>
-                            <p:message for="courseName"/>
+                            <p:outputLabel for="carVin" value="Car vin"/>
+                            <p:inputText id="carVin" value="#{requestUseCaseControllerJPA.car.vin}"/>
+                            <p:message for="carVin"/>
+
+                            <p:outputLabel for="carBuilt" value="built year"/>
+                            <p:inputText id="carBuilt" value="#{requestUseCaseControllerJPA.car.built}">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </p:inputText>
+                            <p:message for="carBuilt"/>
+
+                            <p:outputLabel for="carColor" value="car color"/>
+                            <p:inputText id="carColor" value="#{requestUseCaseControllerJPA.car.color}">
+                            </p:inputText>
+                            <p:message for="carColor"/>
+                        </h:panelGrid>
+                    </td>
+                    <td>
+                        <h:panelGrid columns="3">
+                            <p:outputLabel for="ownerFirstName" value="Owner first name"/>
+                            <p:inputText id="ownerFirstName" value="#{requestUseCaseControllerJPA.owner.firstName}"/>
+                            <p:message for="ownerFirstName"/>
+
+                            <p:outputLabel for="ownerLastName" value="Owner last name"/>
+                            <p:inputText id="ownerLastName" value="#{requestUseCaseControllerJPA.owner.lastName}"/>
+                            <p:message for="ownerLastName"/>
                         </h:panelGrid>
                     </td>
                 </tr>
             </table>
 
-            <p:commandButton value="Create student and course"
+            <p:commandButton value="Create new insurance with car and owner"
                              actionListener="#{requestUseCaseControllerJPA.createCourseStudent()}"
                              action="simple-usecase-jpa?faces-redirect=true"
                              ajax="false"/>

@@ -16,7 +16,7 @@ public class InsuranceDAO {
         em.persist(insurance);
     }
 
-    public List<Insurance> getAllCourses() {
+    public List<Insurance> getAllInsurances() {
         return em.createNamedQuery("Insurance.findAll", Insurance.class).getResultList();
     }
 }

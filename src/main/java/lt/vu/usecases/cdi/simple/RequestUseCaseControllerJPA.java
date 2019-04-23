@@ -27,11 +27,11 @@ public class RequestUseCaseControllerJPA {
     private Insurance insurance = new Insurance();
 
     @Getter
-    private List<Car> allCars;
+    private List<Insurance> allInsurances;
 
     @PostConstruct
     public void init() {
-        loadAllStudents();
+        loadAllInsurances();
     }
 
     @Inject
@@ -43,14 +43,18 @@ public class RequestUseCaseControllerJPA {
 
     @Transactional
     public void createCourseStudent() {
-        // getCourseList()
+        car.getInsuranceList().add(insurance);
+        insurance.getCarList().add(car);
+        car.setOwner(owner);
+
         ownerDAO.create(owner);
-        insuranceDAO.create(insurance);
         carDAO.create(car);
+        insuranceDAO.create(insurance);
+
         log.info("Maybe OK...");
     }
 
-    private void loadAllStudents() {
-        allCars = carDAO.getAllCars();
+    private void loadAllInsurances() {
+        allInsurances = insuranceDAO.getAllInsurances();
     }
 }
