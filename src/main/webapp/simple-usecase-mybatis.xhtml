@@ -17,13 +17,22 @@
             <p:fieldset legend="All insurances" toggleable="true" style="width: 50%">
                 <p:dataTable value="#{requestUseCaseControllerMyBatis.allInsurances}" var="insurance">
                     <p:column headerText="Insurance">
-                        <h:outputText value="#{insurance.dateStart} #{insurance.dateEnd}" />
+                        <h:outputText value="#{insurance.dateStart}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
+                        <h:outputText value=" - " />
+                        <h:outputText value="#{insurance.dateEnd}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:outputText>
                     </p:column>
                     <p:column headerText="Car">
                         <ui:repeat var="car" value="#{insurance.cars}">
-                            <h:outputText value="#{car.vin} #{car.built} #{car.color}" />
+                            <h:outputText value="#{car.built}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:outputText>
+                            <h:outputText value=" #{car.vin} #{car.color}" />
                             <p:column headerText="Owner">
-                                <h:outputText value="owned by #{car.owner.firstName} #{car.owner.lastName}" />
+                                <h:outputText value=" owned by #{car.owner.firstName} #{car.owner.lastName}" />
                             </p:column>
                         </ui:repeat>
                     </p:column>
