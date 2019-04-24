@@ -18,4 +18,14 @@
   - [ ] Naudojantis ORM/JPA (0.1)
   - [ ] Naudojantis DataMapper/MyBatis (0.1)
   - [ ] Reikia gebėti paaiškinti skirtumus/privalumus/trūkumus tarp ORM ir DataMapper (kada ką geriau naudoti). (0.1)
+    - ORM:
+      - upside:
+        - real entities
+        - less sql
+        - less boilerplate
+        - More domain visibility in your
+      - downside:
+        - shittier sql
+        - confusing magic
+        - domain != database
   - [ ] Būtinos automatinės/deklaratyvios DB transakcijos (rankomis rašyti "begin()/commit()" negalima). (0.05)
