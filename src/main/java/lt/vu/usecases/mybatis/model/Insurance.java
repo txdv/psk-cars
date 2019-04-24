@@ -1,7 +1,11 @@
 package lt.vu.usecases.mybatis.model;
 
+import lombok.Setter;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class Insurance {
     /**
@@ -135,4 +139,8 @@ public class Insurance {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    @Setter
+    @Getter
+    private List<Car> cars;
 }

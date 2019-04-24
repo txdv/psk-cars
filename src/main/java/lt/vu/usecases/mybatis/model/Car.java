@@ -1,5 +1,8 @@
 package lt.vu.usecases.mybatis.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 public class Car {
@@ -167,4 +170,8 @@ public class Car {
     public void setOwnerId(Integer ownerId) {
         this.ownerId = ownerId;
     }
+
+    @Getter
+    @Setter
+    private Owner owner;
 }
