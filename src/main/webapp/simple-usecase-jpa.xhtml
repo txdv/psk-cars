@@ -23,7 +23,8 @@
                         <h:outputText value=" - " />
                         <h:outputText value="#{insurance.dateEnd}">
                             <f:convertDateTime pattern="yyyy-MM-dd" />
-                        </h:outputText>                    </p:column>
+                        </h:outputText>
+                    </p:column>
                     <p:column headerText="Car">
                         <ui:repeat var="car" value="#{insurance.carList}">
                             <h:outputText value="#{car.built}">
