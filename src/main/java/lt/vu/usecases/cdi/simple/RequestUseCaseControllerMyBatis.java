@@ -40,7 +40,7 @@ public class RequestUseCaseControllerMyBatis {
     private InsuranceCarMapper insuranceCarMapper;
 
     @Transactional
-    public void createCourseStudent() {
+    public void createCarOwnerInsurance() {
         ownerMapper.insert(owner);
         car.setOwnerId(owner.getId());
         carMapper.insert(car);

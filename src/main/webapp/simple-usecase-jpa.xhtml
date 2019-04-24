@@ -32,7 +32,7 @@
                             </h:outputText>
                             <h:outputText value=" #{car.vin} #{car.color}"/>
                             <p:column headerText="Owner">
-                                <h:outputText value="owned by #{car.owner.firstName} #{car.owner.lastName}" />
+                                <h:outputText value=" owned by #{car.owner.firstName} #{car.owner.lastName}" />
                             </p:column>
                         </ui:repeat>
                     </p:column>
@@ -90,7 +90,7 @@
             </table>
 
             <p:commandButton value="Create new insurance with car and owner"
-                             actionListener="#{requestUseCaseControllerJPA.createCourseStudent()}"
+                             actionListener="#{requestUseCaseControllerJPA.createCarOwnerInsurance()}"
                              action="simple-usecase-jpa?faces-redirect=true"
                              ajax="false"/>
 

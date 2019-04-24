@@ -42,7 +42,7 @@ public class RequestUseCaseControllerJPA {
     private CarDAO carDAO;
 
     @Transactional
-    public void createCourseStudent() {
+    public void createCarOwnerInsurance() {
         car.getInsuranceList().add(insurance);
         insurance.getCarList().add(car);
         car.setOwner(owner);
