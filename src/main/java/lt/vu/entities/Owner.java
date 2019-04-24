@@ -42,5 +42,4 @@ public class Owner implements Serializable {
 
     @OneToMany
     private List<Car> carList = new ArrayList<>();
-
 }

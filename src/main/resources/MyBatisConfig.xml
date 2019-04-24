@@ -7,7 +7,7 @@
         <typeAlias type="lt.vu.usecases.mybatis.model.Insurance" alias="Insurance"/>
         <typeAlias type="lt.vu.usecases.mybatis.model.Car" alias="Car"/>
         <typeAlias type="lt.vu.usecases.mybatis.model.Owner" alias="Owner"/>
-        <typeAlias type="lt.vu.usecases.mybatis.model.CarInsurance" alias="CarInsurance"/>
+        <typeAlias type="lt.vu.usecases.mybatis.model.InsuranceCar" alias="InsuranceCar"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">

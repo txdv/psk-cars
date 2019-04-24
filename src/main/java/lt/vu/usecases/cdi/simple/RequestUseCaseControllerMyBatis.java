@@ -44,6 +44,7 @@ public class RequestUseCaseControllerMyBatis {
         ownerMapper.insert(owner);
         car.setOwnerId(owner.getId());
         carMapper.insert(car);
+        insuranceMapper.insert(insurance);
 
         InsuranceCar insuranceCar = new InsuranceCar();
         insuranceCar.setInsuranceId(insurance.getId());
